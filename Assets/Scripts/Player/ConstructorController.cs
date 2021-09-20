@@ -22,9 +22,18 @@ public class ConstructorController
 
     public void NormalControls()
     {
-        _player.Movement();
+        if (GameManager.instance.finalPosSwipe.x > (GameManager.instance.initPosSwipe.x + _player.distancePixel))
+        {
+            _player.Right();
+        }
+        else if (GameManager.instance.initPosSwipe.x > (GameManager.instance.finalPosSwipe.x + _player.distancePixel))
+        {
+            _player.Left();
+        }
 
-        //Pause PlaceHolder no funciona si esta puesto el UnityRemote hay que crealer un boton
+        _player.MoveDir(_player.MoveDirX);
+
+        //Pause PlaceHolder no funciona si esta puesto el UnityRemote, hay que crealer un boton
         if (Input.GetKey(KeyCode.P))
         {
             changeControls = PausedControls;

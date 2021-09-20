@@ -11,11 +11,9 @@ namespace PlayerMasion
         [SerializeField]
         private Rigidbody rbPlayer;
         [SerializeField]
-        private float speedPlayer;
-
-        private Vector3 MoveDirX;
-        [SerializeField]
-        private int distancePixel;
+        private float speedPlayer = 0;
+        public Vector3 MoveDirX;
+        public int distancePixel;
 
         void Start()
         {
@@ -23,36 +21,20 @@ namespace PlayerMasion
             Right();
         }
 
-        // Update is called once per frame
         void Update()
         {
             control.OnUpdate();
         }
 
-        public void Movement()
-        {
-
-            if (GameManager.instance.finalPosSwipe.x > (GameManager.instance.initPosSwipe.x + distancePixel))
-            {
-                Right();
-            }
-            else if (GameManager.instance.initPosSwipe.x > (GameManager.instance.finalPosSwipe.x + distancePixel))
-            {
-                Left();
-            }
-
-            MoveDir(MoveDirX);
-        }
-        void MoveDir(Vector3 direction)
+        public void MoveDir(Vector3 direction)
         {
             transform.position += direction * (speedPlayer * Time.deltaTime);
         }
-
-        void Right()
+        public void Right()
         {
             MoveDirX = Vector3.right;
         }
-        void Left()
+        public void Left()
         {
             MoveDirX = Vector3.left;
         }

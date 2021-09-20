@@ -6,7 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    private bool startSwipe;
+    [HideInInspector]
+    public bool startSwipe;
     [HideInInspector]
     public Vector2 initPosSwipe;
     [HideInInspector]
