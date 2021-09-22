@@ -43,6 +43,6 @@ public class GameManager : MonoBehaviour
     {
         finalPosSwipe = Input.touches[0].position;
         startSwipe = false;
-        Debug.Log("Start Position: " + initPosSwipe.x + " / End Position: " + finalPosSwipe.x);
+        //Debug.Log("Start Position: " + initPosSwipe.x + " / End Position: " + finalPosSwipe.x);
     }
 }
