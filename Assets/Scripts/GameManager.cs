@@ -1,17 +1,20 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+    public int distancePixel;
     [HideInInspector]
     public bool startSwipe;
     [HideInInspector]
     public Vector2 initPosSwipe;
     [HideInInspector]
     public Vector2 finalPosSwipe;
+    public Action endSwipe;
 
     void Awake()
     {
@@ -43,6 +46,7 @@ public class GameManager : MonoBehaviour
     {
         finalPosSwipe = Input.touches[0].position;
         startSwipe = false;
+        endSwipe.Invoke();
         //Debug.Log("Start Position: " + initPosSwipe.x + " / End Position: " + finalPosSwipe.x);
     }
 }

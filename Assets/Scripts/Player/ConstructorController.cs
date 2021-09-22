@@ -13,52 +13,34 @@ public class ConstructorController
     {
         _player = p;
         changeControls = NormalControls;
+        GameManager.instance.endSwipe=GetDir;
     }
 
     public void OnUpdate()
     {
         changeControls();
     }
-
     public void NormalControls()
     {
-        if((GameManager.instance.finalPosSwipe.x + _player.distancePixel) != _player.distancePixel)
-        {
-            if (GameManager.instance.finalPosSwipe.x > (GameManager.instance.initPosSwipe.x + _player.distancePixel))
-            {
-                _player.Right();
-            }
-            else if (GameManager.instance.initPosSwipe.x > (GameManager.instance.finalPosSwipe.x + _player.distancePixel))
-            {
-                _player.Left();
-            }
+        Move();
+    }
 
-            _player.MoveDir(_player.MoveDirX);
-        }
-
-        if (Input.GetKeyDown("a"))
-        {
-            _player.Left();
-            _player.MoveDir(_player.MoveDirX);
-        }  
-        else if (Input.GetKeyDown("d"))
+    public void GetDir()
+    {
+        if (GameManager.instance.finalPosSwipe.x > (GameManager.instance.initPosSwipe.x + GameManager.instance.distancePixel) && _player.stopPlayer == false)
         {
             _player.Right();
-            _player.MoveDir(_player.MoveDirX);
         }
-            
-        //Pause PlaceHolder no funciona si esta puesto el UnityRemote, hay que crealer un boton
-        if (Input.GetKey(KeyCode.P))
+        else if (GameManager.instance.initPosSwipe.x > (GameManager.instance.finalPosSwipe.x + GameManager.instance.distancePixel) && _player.stopPlayer == false)
         {
-            changeControls = PausedControls;
+            _player.Left();
         }
     }
 
-    public void PausedControls()
+    public void Move()
     {
-        if (Input.GetKey(KeyCode.P))
-        {
-            changeControls = NormalControls;
-        }
+        _player.MoveDir(_player.moveDirX);
+        _player.Rotate(_player.positionCamara);
     }
+
 }
