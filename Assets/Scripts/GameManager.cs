@@ -8,9 +8,9 @@ public class GameManager : MonoBehaviour
 
     [HideInInspector]
     public bool startSwipe;
-    [HideInInspector]
+    //[HideInInspector]
     public Vector2 initPosSwipe;
-    [HideInInspector]
+    //[HideInInspector]
     public Vector2 finalPosSwipe;
 
     void Awake()

@@ -13,11 +13,17 @@ namespace PlayerMasion
         public Animator animator;
         [SerializeField]
         private float speedPlayer = 0;
-        public float rotationSpeedPlayer;
+        [SerializeField]
+        private float rotationSpeedPlayer = 0;
 
         [HideInInspector]
-        public Vector3 MoveDirX;
+        public Vector3 moveDirX;
+        [HideInInspector]
+        public Vector3 positionCamara;
         public int distancePixel;
+
+        public int xCam;
+        public int zCam;
 
         void Start()
         {
@@ -29,34 +35,33 @@ namespace PlayerMasion
             control.OnUpdate();
         }
 
-        public void MoveDir(Vector3 direction)
-        {
-            animator.SetBool("Walking", true);
-            transform.position += direction * (speedPlayer * Time.deltaTime);
-        }
         public void Right()
         {
-            MoveDirX = new Vector3(90, 0, 0);
-            Rotate();
+            moveDirX = Vector3.right;
+            positionCamara = new Vector3(xCam, 0, -zCam);
+
         }
         public void Left()
         {
-            MoveDirX = new Vector3(270,0,0);
-            Rotate();
+            moveDirX = Vector3.left;
+            positionCamara = new Vector3(-xCam, 0, -zCam);
         }
 
-        public void Rotate()
+        public void MoveDir(Vector3 direction)
         {
-            Quaternion toRotation = Quaternion.Euler(MoveDirX);
-            /*if(MoveDirX == Vector3.left)
+            transform.position += direction * (speedPlayer * Time.deltaTime);
+            Debug.Log(direction);
+        }
+
+        public void Rotate(Vector3 camaraDirection)
+        {
+            if(camaraDirection != Vector3.zero)
             {
-                transform.rotation = Quaternion.Euler(new Vector3(0, 270, 0) * Time.deltaTime);
+                animator.SetBool("Walking", true);
+                Quaternion toRotation = Quaternion.LookRotation(camaraDirection);
+                transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeedPlayer * Time.deltaTime);
             }
-            else if (MoveDirX == Vector3.right)
-            {
-                transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0) * Time.deltaTime);
-            }*/
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeedPlayer * Time.deltaTime);
+
         }
     }
 }
