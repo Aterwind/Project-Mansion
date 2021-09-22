@@ -36,27 +36,27 @@ namespace PlayerMasion
         }
         public void Right()
         {
-            MoveDirX = Vector3.right;
+            MoveDirX = new Vector3(90, 0, 0);
             Rotate();
         }
         public void Left()
         {
-            MoveDirX = Vector3.left;
+            MoveDirX = new Vector3(270,0,0);
             Rotate();
         }
 
         public void Rotate()
         {
-            //Quaternion toRotation = Quaternion.LookRotation(MoveDirX);
-            if(MoveDirX == Vector3.left)
+            Quaternion toRotation = Quaternion.Euler(MoveDirX);
+            /*if(MoveDirX == Vector3.left)
             {
-                transform.rotation = Quaternion.Euler(new Vector3(0, 270, 0));
+                transform.rotation = Quaternion.Euler(new Vector3(0, 270, 0) * Time.deltaTime);
             }
             else if (MoveDirX == Vector3.right)
             {
-                transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
-            }
-            //transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeedPlayer * Time.deltaTime);
+                transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0) * Time.deltaTime);
+            }*/
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, toRotation, rotationSpeedPlayer * Time.deltaTime);
         }
     }
 }
