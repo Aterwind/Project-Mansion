@@ -7,6 +7,10 @@ namespace PlayerMasion
     public class Player : MonoBehaviour
     {
         ConstructorController control;
+
+        public bool noWall = true;
+        private int _layerMask = 1 << 8;
+
         [Header("Fisica")]
         [SerializeField]
         private Rigidbody rbPlayer;
@@ -33,6 +37,7 @@ namespace PlayerMasion
         void Update()
         {
             control.OnUpdate();
+            Raycast();
         }
 
         //Movimiento y Camara//
@@ -50,12 +55,13 @@ namespace PlayerMasion
 
         public void MoveDir(Vector3 direction)
         {
-            transform.position += direction * (speedPlayer * Time.deltaTime);
+            if (noWall == true)
+                transform.position += direction * (speedPlayer * Time.deltaTime);
         }
 
         public void Rotate(Vector3 camaraDirection)
         {
-            if(camaraDirection != Vector3.zero)
+            if (camaraDirection != Vector3.zero)
             {
                 animator.SetBool("Walking", true);
                 Quaternion toRotation = Quaternion.LookRotation(camaraDirection);
@@ -63,5 +69,20 @@ namespace PlayerMasion
             }
         }
         //------------------//
+
+        public void Raycast()
+        {
+            Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z), transform.forward, Color.red, 2f);
+            if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z), transform.forward, 1.5f, _layerMask))
+            {
+                noWall = false;
+                animator.SetBool("Walking", false);
+            }
+            else
+            {
+                noWall = true;
+            }
+                
+        }
     }
 }
