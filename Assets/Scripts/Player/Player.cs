@@ -16,9 +16,6 @@ namespace PlayerMasion
         [SerializeField]
         private float rotationSpeedPlayer = 0;
 
-        [Header("UWU")]
-        public bool stopPlayer = false;
-
         [HideInInspector]
         public Vector3 moveDirX;
         [HideInInspector]

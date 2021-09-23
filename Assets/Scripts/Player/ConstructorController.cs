@@ -27,11 +27,11 @@ public class ConstructorController
 
     public void GetDir()
     {
-        if (GameManager.instance.finalPosSwipe.x > (GameManager.instance.initPosSwipe.x + GameManager.instance.distancePixel) && _player.stopPlayer == false)
+        if (GameManager.instance.finalPosSwipe.x > (GameManager.instance.initPosSwipe.x + GameManager.instance.distancePixel))
         {
             _player.Right();
         }
-        else if (GameManager.instance.initPosSwipe.x > (GameManager.instance.finalPosSwipe.x + GameManager.instance.distancePixel) && _player.stopPlayer == false)
+        else if (GameManager.instance.initPosSwipe.x > (GameManager.instance.finalPosSwipe.x + GameManager.instance.distancePixel))
         {
             _player.Left();
         }
