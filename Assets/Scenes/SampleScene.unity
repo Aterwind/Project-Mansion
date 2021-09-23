@@ -5705,7 +5705,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c092fcc139830542800951dc1eaa3f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  noWall: 1
   rbPlayer: {fileID: 8296172668778911816}
   animator: {fileID: 3166231813435508527}
   speedPlayer: 4
@@ -5714,6 +5713,10 @@ MonoBehaviour:
   positionCamara: {x: 0, y: 0, z: 0}
   xCam: 6
   zCam: 4
+  noWall: 1
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!54 &8296172668778911816
 Rigidbody:
   m_ObjectHideFlags: 0

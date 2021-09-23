@@ -41,6 +41,7 @@ public class ConstructorController
     {
         _player.MoveDir(_player.moveDirX);
         _player.Rotate(_player.positionCamara);
+        _player.Raycast();
     }
 
 }

@@ -8,9 +8,6 @@ namespace PlayerMasion
     {
         ConstructorController control;
 
-        public bool noWall = true;
-        private int _layerMask = 1 << 8;
-
         [Header("Fisica")]
         [SerializeField]
         private Rigidbody rbPlayer;
@@ -29,6 +26,11 @@ namespace PlayerMasion
         public int xCam;
         public int zCam;
 
+        [Header("Raycast")]
+        public bool noWall = true;
+        [SerializeField]
+        private LayerMask _layerMask;
+
         void Start()
         {
             control = new ConstructorController(this);
@@ -37,7 +39,6 @@ namespace PlayerMasion
         void Update()
         {
             control.OnUpdate();
-            Raycast();
         }
 
         //Movimiento y Camara//
@@ -72,8 +73,7 @@ namespace PlayerMasion
 
         public void Raycast()
         {
-            Debug.DrawRay(new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z), transform.forward, Color.red, 2f);
-            if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z), transform.forward, 1.5f, _layerMask))
+            if (Physics.Raycast(transform.position, transform.forward, 1.5f, _layerMask))
             {
                 noWall = false;
                 animator.SetBool("Walking", false);
