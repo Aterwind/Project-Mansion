@@ -126,7 +126,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14594
+  m_Name: pb_Mesh14468
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -484,7 +484,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-15528
+  m_Name: pb_Mesh14532
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1349,7 +1349,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 3.772e-42, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 4e-45}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -3598,7 +3598,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-14718
+  m_Name: pb_Mesh14456
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -5708,8 +5708,10 @@ MonoBehaviour:
   rbPlayer: {fileID: 8296172668778911816}
   animator: {fileID: 3166231813435508527}
   speedPlayer: 4
+  jumpSpeed: 20
   rotationSpeedPlayer: 600
   moveDirX: {x: 0, y: 0, z: 0}
+  moveDirY: {x: 0, y: 0, z: 0}
   positionCamara: {x: 0, y: 0, z: 0}
   xCam: 6
   zCam: 4
@@ -5732,7 +5734,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &8296172668778911817
 CapsuleCollider:
   m_ObjectHideFlags: 0

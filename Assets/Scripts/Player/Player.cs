@@ -15,10 +15,14 @@ namespace PlayerMasion
         [SerializeField]
         private float speedPlayer = 0;
         [SerializeField]
+        private float jumpSpeed = 0;
+        [SerializeField]
         private float rotationSpeedPlayer = 0;
 
         [HideInInspector]
         public Vector3 moveDirX;
+        [HideInInspector]
+        public Vector3 moveDirY;
         [HideInInspector]
         public Vector3 positionCamara;
 
@@ -30,6 +34,8 @@ namespace PlayerMasion
         public bool noWall = true;
         [SerializeField]
         private LayerMask _layerMask;
+
+        private bool Jump = false;
 
         void Start()
         {
@@ -53,11 +59,33 @@ namespace PlayerMasion
             moveDirX = Vector3.left;
             positionCamara = new Vector3(-xCam, 0, -zCam);
         }
+        public void Up()
+        {
+            Debug.Log("arriba");
+            moveDirY = Vector3.up;
+            Jump = true;
+        }
+        public void Down()
+        {
+            Debug.Log("abajo");
+            moveDirY = Vector3.down;
+            Jump = true;
+        }
 
         public void MoveDir(Vector3 direction)
         {
             if (noWall == true)
                 transform.position += direction * (speedPlayer * Time.deltaTime);
+        }
+
+        public void JumpDir(Vector3 directionY)
+        {
+            if (Jump == true)
+            {
+                Jump = false;
+                rbPlayer.AddForce(directionY * jumpSpeed, ForceMode.Impulse);
+
+            }
         }
 
         public void Rotate(Vector3 camaraDirection)
@@ -82,7 +110,6 @@ namespace PlayerMasion
             {
                 noWall = true;
             }
-                
         }
     }
 }
