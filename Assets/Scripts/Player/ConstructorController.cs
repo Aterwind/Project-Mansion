@@ -6,12 +6,12 @@ using PlayerMasion;
 
 public class ConstructorController
 {
-    Player _player;
+    MovementConstructor _movement;
     Action changeControls;
 
-    public ConstructorController(Player p)
+    public ConstructorController(MovementConstructor m)
     {
-        _player = p;
+        _movement=m;
         changeControls = NormalControls;
         GameManager.instance.endSwipe=GetDir;
     }
@@ -29,29 +29,30 @@ public class ConstructorController
     {
         if (GameManager.instance.finalPosSwipe.x > (GameManager.instance.initPosSwipe.x + GameManager.instance.distancePixel))
         {
-            _player.Right();
+            _movement.Right();
         }
         else if (GameManager.instance.initPosSwipe.x > (GameManager.instance.finalPosSwipe.x + GameManager.instance.distancePixel))
         {
-            _player.Left();
+            _movement.Left();
         }
 
         if (GameManager.instance.initPosSwipe.y > (GameManager.instance.finalPosSwipe.y + GameManager.instance.distancePixel))
         {
-            _player.Down();
+            _movement.Down();
         }
         else if(GameManager.instance.finalPosSwipe.y > (GameManager.instance.initPosSwipe.y + GameManager.instance.distancePixel))
         {
-            _player.Up();
+            _movement.Up();
         }
     }
 
+
     public void Move()
     {
-        _player.MoveDir(_player.moveDirX);
-        _player.JumpDir(_player.moveDirY);
-        _player.Rotate(_player.positionCamara);
-        _player.Raycast();
+        _movement.MoveDir(_movement._player.moveDirX);
+        _movement.JumpDir(_movement._player.moveDirY);
+        _movement.Rotate(_movement._player.positionCamara);
+        _movement.Raycast();
     }
 
 }
