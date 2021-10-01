@@ -36,6 +36,7 @@ public abstract class Unit : MonoBehaviour, IDamageable
             if(currentHitLife <= 0)
             {
                 Debug.Log("murio :c");
+                animator.SetTrigger("Die");
             }
             else if( currentHitLife > 0)
             {
