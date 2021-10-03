@@ -5,15 +5,13 @@ using UnityEngine;
 public class PlayerHP : MonoBehaviour,IDamageable
 {
     [Header("Vida Player")]
-    public int hP = 100;
+    public int hP = 20;
+    public int currentHP;
 
     public void Start()
     {
-        EventManager.Subscribe("SetHP", FunSetHP);
-    }
-
-    private void Update()
-    {
+        currentHP = hP;
+        EventManager.Subscribe("SetHP",FuncSetHP);
         EventManager.Trigger("UpdateUIhp", hP);
     }
 
@@ -22,8 +20,10 @@ public class PlayerHP : MonoBehaviour,IDamageable
         if(amoutDamage > 0 && hP > 0)
         {
             hP -= amoutDamage;
+            Debug.Log("xd");
+            EventManager.Trigger("SetHP", hP);
 
-            if(hP <= 0)
+            if (hP <= 0)
             {
                 Debug.Log("murio :c");
             }
@@ -34,8 +34,18 @@ public class PlayerHP : MonoBehaviour,IDamageable
         }
     }
 
-    public void FunSetHP(object[] paremeters)
+    public void ReceiveHP(int amoutHP)
     {
+        if(amoutHP < hP && hP < currentHP)
+        {
+            hP += amoutHP;
+            EventManager.Trigger("SetHP", hP);
+        }
+    }
+
+    public void FuncSetHP(object[] parameters)
+    {
+        hP = (int)parameters[0];
         EventManager.Trigger("UpdateUIhp", hP);
     }
 }

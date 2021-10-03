@@ -5,4 +5,5 @@ using UnityEngine;
 public interface IDamageable
 {
     void ReceiveDamage(int amoutDamage);
+    void ReceiveHP(int amoutHP);
 }

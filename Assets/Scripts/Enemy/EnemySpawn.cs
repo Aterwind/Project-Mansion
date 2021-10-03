@@ -6,7 +6,7 @@ public class EnemySpawn : MonoBehaviour
 {
     public EnemySpawn enemySpawn;
     private int _RandomListEnemy;
-    public int stock;
+    public int stock = 0;
 
     public List<EnemiesBase> enemyType = new List<EnemiesBase>();
     public List<GameObject> spawnList = new List<GameObject>();
@@ -35,6 +35,11 @@ public class EnemySpawn : MonoBehaviour
             enemyType[_RandomListEnemy].transform.forward = spawnList[RandomList].transform.forward;
 
             enemyType[_RandomListEnemy].BackStock = pool.ReturnObject;
+
+            if(enemyType[0].BackStock != null)
+            {
+                Debug.Log("estoy aca");
+            }
         }
     }
 
