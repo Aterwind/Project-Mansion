@@ -5,9 +5,7 @@ using UnityEngine;
 public abstract class Unit : MonoBehaviour, IDamageable
 {
     [Header("Vida Player")]
-    [SerializeField]
-    protected int Life = 100;
-    public int currentHitLife;
+    public int hp=100;
 
     [Header("Fisica")]
     public Rigidbody rb;
@@ -23,25 +21,40 @@ public abstract class Unit : MonoBehaviour, IDamageable
     [HideInInspector]
     public Vector3 positionCamara;
 
-    virtual protected void Awake()
+    public void Start()
     {
-        currentHitLife = Life;
+        EventManager.Subscribe("SetHP", FunSetHP);
     }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            EventManager.Trigger("UpdateUIhp", 1);
+        }
+
+    }
+
     public void ReceiveDamage(int amoutDamage)
     {
-        if(amoutDamage > 0 && currentHitLife > 0)
+        if(amoutDamage > 0 && hp > 0)
         {
-            currentHitLife -= amoutDamage;
+            hp -= amoutDamage;
 
-            if(currentHitLife <= 0)
+            if(hp <= 0)
             {
                 Debug.Log("murio :c");
                 animator.SetTrigger("Die");
             }
-            else if( currentHitLife > 0)
+            else if(hp > 0)
             {
                 Debug.Log("Te pegaron un cachetada uwu");
             }
         }
+    }
+
+    public void FunSetHP(object[] paremeters)
+    {
+        
     }
 }

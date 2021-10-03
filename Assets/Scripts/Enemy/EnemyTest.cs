@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class EnemyTest : MonoBehaviour
+public class EnemyTest : EnemiesBase
 {
     public float speed;
     float _currentDistance;
     public float maxdistance;
-    public Action<EnemyTest> BackStock;
 
     public void Reset()
     {
@@ -22,19 +21,18 @@ public class EnemyTest : MonoBehaviour
 
         if(_currentDistance >= maxdistance)
         {
+            Reset();
             BackStock.Invoke(this);
         }
     }
 
-    public void TurnOff(EnemyTest b)
+    public override void TurnOff(EnemiesBase b)
     {
-        b.Reset();
         b.gameObject.SetActive(false);
     }
 
-    public void TurnOn(EnemyTest b)
+    public override void TurnOn(EnemiesBase b)
     {
-        b.Reset();
         b.gameObject.SetActive(true);
     }
 }

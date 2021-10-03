@@ -5,30 +5,43 @@ using UnityEngine;
 public class EnemySpawn : MonoBehaviour
 {
     public EnemySpawn enemySpawn;
-    public EnemyTest enemyT;
+    private int _RandomListEnemy;
+    public int stock;
 
-    public ObjectPool<EnemyTest> pool;
+    public List<EnemiesBase> enemyType = new List<EnemiesBase>();
+    public List<GameObject> spawnList = new List<GameObject>();
+    public ObjectPool<EnemiesBase> pool;
 
     void Start()
     {
-        enemySpawn = this;
-        pool = new ObjectPool<EnemyTest>(BulletReturn, enemyT.TurnOn, enemyT.TurnOff, 10);
+        pool = new ObjectPool<EnemiesBase>(BulletReturn, enemyType[_RandomListEnemy].TurnOn, enemyType[_RandomListEnemy].TurnOff, stock);
+        EventManager.Subscribe("NewWave", Spawn);
     }
 
-    private void Update()
+    void Update()
+    {
+        EventManager.Trigger("NewWave");
+    }
+
+    void Spawn(params object[] parameters)
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            enemyT = pool.GetObject();
-            enemyT.transform.position = this.transform.position;
-            enemyT.transform.forward = this.transform.forward;
+            enemyType[_RandomListEnemy] = pool.GetObject();
 
-            enemyT.BackStock = pool.ReturnObject;
+            int RandomList = Random.Range(0, 8);
+
+            enemyType[_RandomListEnemy].transform.position = spawnList[RandomList].transform.position;
+            enemyType[_RandomListEnemy].transform.forward = spawnList[RandomList].transform.forward;
+
+            enemyType[_RandomListEnemy].BackStock = pool.ReturnObject;
         }
     }
 
-    public EnemyTest BulletReturn()
+    public EnemiesBase BulletReturn()
     {
-        return Instantiate(enemyT);
+        _RandomListEnemy = Random.Range(0, 2);
+        return Instantiate(enemyType[_RandomListEnemy]);
     }
+
 }

@@ -19,7 +19,7 @@ namespace PlayerMasion
         [HideInInspector]
         public bool Jump = false;
 
-        void Start()
+        new void Start()
         {
             movement = new MovementConstructor(this);
             control = new ConstructorController(movement);
