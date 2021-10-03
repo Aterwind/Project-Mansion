@@ -15,6 +15,6 @@ public class ControlHUDStats : MonoBehaviour
 
     void UpdateHpText(object[] parameters)
     {
-        hpText.text = "hp:" +parameters;
+        hpText.text = "hp" + parameters[0];
     }
 }

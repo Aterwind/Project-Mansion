@@ -4,8 +4,22 @@ using UnityEngine;
 
 namespace PlayerMasion
 {
-    public class Player : Unit
+    public class PlayerBehaviour : MonoBehaviour
     {
+        [Header("Fisica")]
+        public Rigidbody rb;
+        public Animator animator;
+        public float speed = 0;
+        public float jumpSpeed = 0;
+        public float rotationSpeed = 0;
+
+        [HideInInspector]
+        public Vector3 moveDirX;
+        [HideInInspector]
+        public Vector3 moveDirY;
+        [HideInInspector]
+        public Vector3 positionCamara;
+
         ConstructorController control;
         MovementConstructor movement;
 
@@ -19,7 +33,7 @@ namespace PlayerMasion
         [HideInInspector]
         public bool Jump = false;
 
-        new void Start()
+        void Start()
         {
             movement = new MovementConstructor(this);
             control = new ConstructorController(movement);

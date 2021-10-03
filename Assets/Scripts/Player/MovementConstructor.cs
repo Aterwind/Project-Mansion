@@ -5,9 +5,9 @@ using PlayerMasion;
 
 public class MovementConstructor
 {
-    public Player _player;
+    public PlayerBehaviour _player;
 
-    public MovementConstructor(Player p)
+    public MovementConstructor(PlayerBehaviour p)
     {
         _player = p;
     }
