@@ -7,7 +7,7 @@ public class AddHP : MonoBehaviour
     [SerializeField] protected int _hp;
     protected virtual void OnTriggerEnter(Collider other)
     {
-        var hit = other.gameObject.GetComponent<IDamageable>();
+        var hit = other.gameObject.GetComponent<IReceiveHP>();
         if (hit != null)
         {
             hit.ReceiveHP(_hp);

@@ -7,6 +7,7 @@ public class EnemySpawn : MonoBehaviour
     public EnemySpawn enemySpawn;
     private int _RandomListEnemy;
     public int stock = 0;
+    public int updateEnemies;
 
     public List<EnemiesBase> enemyType = new List<EnemiesBase>();
     public List<GameObject> spawnList = new List<GameObject>();
@@ -14,8 +15,10 @@ public class EnemySpawn : MonoBehaviour
 
     void Start()
     {
+        updateEnemies = stock;
         pool = new ObjectPool<EnemiesBase>(BulletReturn, enemyType[_RandomListEnemy].TurnOn, enemyType[_RandomListEnemy].TurnOff, stock);
         EventManager.Subscribe("NewWave", Spawn);
+        EventManager.Trigger("UpdateUIenemyTotal", updateEnemies);
     }
 
     void Update()
@@ -33,13 +36,7 @@ public class EnemySpawn : MonoBehaviour
 
             enemyType[_RandomListEnemy].transform.position = spawnList[RandomList].transform.position;
             enemyType[_RandomListEnemy].transform.forward = spawnList[RandomList].transform.forward;
-
             enemyType[_RandomListEnemy].BackStock = pool.ReturnObject;
-
-            if(enemyType[0].BackStock != null)
-            {
-                Debug.Log("estoy aca");
-            }
         }
     }
 

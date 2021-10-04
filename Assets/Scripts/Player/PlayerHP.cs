@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHP : MonoBehaviour,IDamageable
+public class PlayerHP : MonoBehaviour,IDamageable, IReceiveHP
 {
     [Header("Vida Player")]
     public int hP = 20;
@@ -20,7 +20,6 @@ public class PlayerHP : MonoBehaviour,IDamageable
         if(amoutDamage > 0 && hP > 0)
         {
             hP -= amoutDamage;
-            Debug.Log("xd");
             EventManager.Trigger("SetHP", hP);
 
             if (hP <= 0)

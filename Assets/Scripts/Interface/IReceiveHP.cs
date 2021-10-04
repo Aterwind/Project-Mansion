@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IDamageable
+public interface IReceiveHP
 {
-    void ReceiveDamage(int amoutDamage);
-    
+    void ReceiveHP(int amoutHP);
 }

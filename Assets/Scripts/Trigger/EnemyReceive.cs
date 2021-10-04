@@ -2,15 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyReceive : EnemiesBase
+public class EnemyReceive : EnemiesBase, IDamageable
 {
-    public void OnTriggerEnter(Collider other)
+    [SerializeField] int hP;
+
+    public void ReceiveDamage(int amoutDamage)
     {
-        var hit = other.gameObject.GetComponent<GeneralAttack>();
-        if (hit != null)
+        hP -= amoutDamage;
+
+        if(hP <= 0)
         {
             Reset();
             BackStock.Invoke(this);
+            EventManager.Trigger("UpdateUIenemyTotal", -1);
         }
     }
 

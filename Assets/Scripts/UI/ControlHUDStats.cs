@@ -10,6 +10,8 @@ public class ControlHUDStats : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI enemyTotalText;
 
+    [SerializeField] private int maxEnemySpawn;
+
     private void Start()
     {
         EventManager.Subscribe("UpdateUIhp", UpdateHpText);
@@ -28,6 +30,12 @@ public class ControlHUDStats : MonoBehaviour
 
     void UpdateEnemyTotalText(object[] parameters)
     {
-        enemyTotalText.text = parameters[0].ToString();
+        maxEnemySpawn += (int)parameters[0]; 
+        enemyTotalText.text = "x " + maxEnemySpawn;
+
+        if(maxEnemySpawn <= 0)
+        {
+            EventManager.UnSubscribe("UpdateUIenemyTotal", UpdateEnemyTotalText);
+        }
     }
 }

@@ -35,6 +35,10 @@ public class ObjectPool<T>
             result = _currentStock[0];
             _currentStock.RemoveAt(0);
         }
+        else
+        {
+            result = _factoryMethod();
+        }
 
         _turnOnCallback(result);
         return result;

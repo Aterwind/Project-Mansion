@@ -49,7 +49,6 @@ public class MovementConstructor
         {
             _player.Jump = false;
             _player.rb.AddForce(directionY * _player.jumpSpeed, ForceMode.Impulse);
-
         }
     }
 
