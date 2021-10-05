@@ -40,6 +40,7 @@ public class ObjectPool<T>
             result = _factoryMethod();
         }
 
+
         _turnOnCallback(result);
         return result;
     }

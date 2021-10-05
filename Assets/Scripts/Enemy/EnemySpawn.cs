@@ -7,7 +7,8 @@ public class EnemySpawn : MonoBehaviour
     public EnemySpawn enemySpawn;
     private int _RandomListEnemy;
     public int stock = 0;
-    public int updateEnemies;
+    private int updateEnemies;
+    private int limiteList;
 
     public List<EnemiesBase> enemyType = new List<EnemiesBase>();
     public List<GameObject> spawnList = new List<GameObject>();
@@ -16,6 +17,7 @@ public class EnemySpawn : MonoBehaviour
     void Start()
     {
         updateEnemies = stock;
+        limiteList = enemyType.Count;
         pool = new ObjectPool<EnemiesBase>(BulletReturn, enemyType[_RandomListEnemy].TurnOn, enemyType[_RandomListEnemy].TurnOff, stock);
         EventManager.Subscribe("NewWave", Spawn);
         EventManager.Trigger("UpdateUIenemyTotal", updateEnemies);
@@ -32,17 +34,17 @@ public class EnemySpawn : MonoBehaviour
         {
             enemyType[_RandomListEnemy] = pool.GetObject();
 
-            int RandomList = Random.Range(0, 8);
+            int spawnRandomList = Random.Range(0, 8);
 
-            enemyType[_RandomListEnemy].transform.position = spawnList[RandomList].transform.position;
-            enemyType[_RandomListEnemy].transform.forward = spawnList[RandomList].transform.forward;
+            enemyType[_RandomListEnemy].transform.position = spawnList[spawnRandomList].transform.position;
+            enemyType[_RandomListEnemy].transform.forward = spawnList[spawnRandomList].transform.forward;
             enemyType[_RandomListEnemy].BackStock = pool.ReturnObject;
         }
     }
 
     public EnemiesBase BulletReturn()
     {
-        _RandomListEnemy = Random.Range(0, 2);
+        _RandomListEnemy = Random.Range(0,limiteList);
         return Instantiate(enemyType[_RandomListEnemy]);
     }
 
