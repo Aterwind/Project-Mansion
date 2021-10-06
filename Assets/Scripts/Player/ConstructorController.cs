@@ -27,7 +27,7 @@ public class ConstructorController
 
     public void GetDir()
     {
-        if (GameManager.instance.finalPosSwipe.x > (GameManager.instance.initPosSwipe.x + GameManager.instance.distancePixel))
+        if (GameManager.instance.finalPosSwipe.x > (GameManager.instance.initPosSwipe.x + GameManager.instance.distancePixel) || Input.GetKeyDown(KeyCode.D))
         {
             _movement.Right();
         }

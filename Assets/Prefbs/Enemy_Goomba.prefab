@@ -182,6 +182,7 @@ MonoBehaviour:
   positionCamara: {x: 0, y: 0, z: 0}
   meshCollider: {fileID: 92490457618529322}
   BoxCollider: {fileID: 8244255295093186894}
+  _transform: {fileID: 8244255294486750778}
   allWaiPoint: {fileID: 8244255294486750783}
 --- !u!114 &8244255294486750783
 MonoBehaviour:
@@ -238,5 +239,5 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1.3589835, y: 1.9301453, z: 21.630999}
-  m_Center: {x: -0.17949179, y: 0.81134605, z: 10.871015}
+  m_Size: {x: 2.7036386, y: 2.8745785, z: 21.630999}
+  m_Center: {x: -0.14761059, y: 0.84566784, z: 10.871015}

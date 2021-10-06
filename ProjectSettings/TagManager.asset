@@ -20,13 +20,13 @@ TagManager:
   - Collections
   - TargetSpawnEnemies
   - Enemies
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - FloorEnemies
+  - Coin
+  - LanternPlayer
+  - DamageEnemies
+  - FloorDetect
+  - Floor
   - 
   - 
   - 

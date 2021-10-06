@@ -5,10 +5,14 @@ using UnityEngine;
 public class EnemySpawn : MonoBehaviour
 {
     public EnemySpawn enemySpawn;
-    private int _RandomListEnemy;
     public int stock = 0;
     private int updateEnemies;
     private int limiteList;
+    private int _RandomListEnemy;
+    private int _MaxRandomListEnemy;
+
+    [SerializeField]private float waveRate = 2;
+    [SerializeField] private float nextWaveTime = 2;
 
     public List<EnemiesBase> enemyType = new List<EnemiesBase>();
     public List<GameObject> spawnList = new List<GameObject>();
@@ -18,28 +22,30 @@ public class EnemySpawn : MonoBehaviour
     {
         updateEnemies = stock;
         limiteList = enemyType.Count;
+        _MaxRandomListEnemy = spawnList.Count;
+
         pool = new ObjectPool<EnemiesBase>(BulletReturn, enemyType[_RandomListEnemy].TurnOn, enemyType[_RandomListEnemy].TurnOff, stock);
-        EventManager.Subscribe("NewWave", Spawn);
         EventManager.Trigger("UpdateUIenemyTotal", updateEnemies);
     }
 
     void Update()
     {
-        EventManager.Trigger("NewWave");
+        if(Time.time >= nextWaveTime)
+        {
+            Spawn();
+            nextWaveTime = Time.time + 1 / waveRate * 30;
+        }
     }
 
-    void Spawn(params object[] parameters)
+    void Spawn()
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            enemyType[_RandomListEnemy] = pool.GetObject();
+        enemyType[_RandomListEnemy] = pool.GetObject();
 
-            int spawnRandomList = Random.Range(0, 8);
+        int spawnRandomList = Random.Range(0, _MaxRandomListEnemy);
 
-            enemyType[_RandomListEnemy].transform.position = spawnList[spawnRandomList].transform.position;
-            enemyType[_RandomListEnemy].transform.forward = spawnList[spawnRandomList].transform.forward;
-            enemyType[_RandomListEnemy].BackStock = pool.ReturnObject;
-        }
+        enemyType[_RandomListEnemy].transform.position = spawnList[spawnRandomList].transform.position;
+        enemyType[_RandomListEnemy].transform.forward = spawnList[spawnRandomList].transform.forward;
+        enemyType[_RandomListEnemy].BackStock = pool.ReturnObject;
     }
 
     public EnemiesBase BulletReturn()
