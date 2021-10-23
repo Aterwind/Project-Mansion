@@ -12,6 +12,7 @@ public class AttackAdavance : IEnemyAdvance
 
     public void EnemyAdvance()
     {
+        _anim.SetBool("ResetIdle", false);
         _anim.SetTrigger("Attack");
     }
 }

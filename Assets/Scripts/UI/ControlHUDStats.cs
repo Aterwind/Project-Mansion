@@ -9,8 +9,10 @@ public class ControlHUDStats : MonoBehaviour
     public TextMeshProUGUI hpText;
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI enemyTotalText;
+    public Image Victory;
 
-    [SerializeField] private int maxEnemySpawn;
+    public int maxEnemySpawn;
+    public int maxItem;
 
     private void Start()
     {
@@ -25,7 +27,8 @@ public class ControlHUDStats : MonoBehaviour
     }
     void UpdateScoreText(object[] parameters)
     {
-        scoreText.text = parameters[0].ToString();
+        maxItem += (int)parameters[0];
+        scoreText.text = maxItem.ToString();
     }
 
     void UpdateEnemyTotalText(object[] parameters)
@@ -36,6 +39,13 @@ public class ControlHUDStats : MonoBehaviour
         if(maxEnemySpawn <= 0)
         {
             EventManager.UnSubscribe("UpdateUIenemyTotal", UpdateEnemyTotalText);
+
+            Victory.transform.gameObject.SetActive(true);
+
+            if (Time.timeScale == 1)
+            {
+                Time.timeScale = 0;
+            }
         }
     }
 }

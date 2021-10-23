@@ -25,6 +25,8 @@ public class PlayerHP : MonoBehaviour,IDamageable, IReceiveHP
             if (hP <= 0)
             {
                 Debug.Log("murio :c");
+                EventManager.Trigger("Death");
+                EventManager.Trigger("resetLevel");
             }
             else if(hP > 0)
             {

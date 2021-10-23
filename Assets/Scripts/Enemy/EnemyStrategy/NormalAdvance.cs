@@ -40,10 +40,12 @@ public class NormalAdvance : IEnemyAdvance
 
         if (_dir.magnitude < 0.5f)
         {
-            _currentWaypoint++;
             _boxCollider.SetActive(false);
-
-            if (_currentWaypoint > _allWaiPoint.targets.Count - 1)
+            if (_currentWaypoint < 1)
+            {
+                _currentWaypoint++;
+            }
+            else if (_currentWaypoint > _allWaiPoint.targets.Count - 1)
             {
                 _currentWaypoint = 0;
             }

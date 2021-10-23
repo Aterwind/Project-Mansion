@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CoinTrigger : MonoBehaviour
+public class CoinTrigger : UnitItem
 {
     [SerializeField]private int points = 0;
 
@@ -18,6 +18,18 @@ public class CoinTrigger : MonoBehaviour
         {
             points += 1;
             EventManager.Trigger("UpdateUIscore", points);
+
+            BackStock.Invoke(this);
         }
+    }
+
+    public override void TurnOff(UnitItem b)
+    {
+        b.gameObject.SetActive(false);
+    }
+
+    public override void TurnOn(UnitItem b)
+    {
+        b.gameObject.SetActive(true);
     }
 }

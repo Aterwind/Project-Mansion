@@ -13,7 +13,9 @@ public class ConstructorController
     {
         _movement=m;
         changeControls = NormalControls;
-        GameManager.instance.endSwipe=GetDir;
+
+        GameManager.instance.endSwipeX=GetDirX;
+        GameManager.instance.endSwipeY = GetDirY;
     }
 
     public void OnUpdate()
@@ -24,8 +26,18 @@ public class ConstructorController
     {
         Move();
     }
+    
+    public void deathControls()
+    {
+        _movement.Die();
+    }
 
-    public void GetDir()
+    public void FuncDeath(object[] parameters)
+    {
+        changeControls = deathControls;
+    }
+
+    public void GetDirX()
     {
         if (GameManager.instance.finalPosSwipe.x > (GameManager.instance.initPosSwipe.x + GameManager.instance.distancePixel) || Input.GetKeyDown(KeyCode.D))
         {
@@ -35,17 +47,21 @@ public class ConstructorController
         {
             _movement.Left();
         }
+    }
 
+    public void GetDirY()
+    {
         if (GameManager.instance.initPosSwipe.y > (GameManager.instance.finalPosSwipe.y + GameManager.instance.distancePixel))
         {
             _movement.Down();
+            GameManager.instance.platformSwitch();
         }
-        else if(GameManager.instance.finalPosSwipe.y > (GameManager.instance.initPosSwipe.y + GameManager.instance.distancePixel))
+        else if (GameManager.instance.finalPosSwipe.y > (GameManager.instance.initPosSwipe.y + GameManager.instance.distancePixel))
         {
             _movement.Up();
+            GameManager.instance.platformSwitch();
         }
     }
-
 
     public void Move()
     {

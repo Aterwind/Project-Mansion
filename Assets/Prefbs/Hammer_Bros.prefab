@@ -208,7 +208,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: b024ccb4616cce24aa6572dcc8c763f1, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 1
+  m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -271,7 +271,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 8977023270583995286}
   animator: {fileID: 6297294609325888581}
-  speed: 2.5
+  speed: 4
   jumpSpeed: 0
   rotationSpeed: 0
   moveDirX: {x: 0, y: 0, z: 0}
@@ -286,7 +286,8 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 8192
-  hammerPrefab: {fileID: 7470044315409914533, guid: b6fbebb58af6ea6468ea74def559f5c1,
+  activeRaycast: 0
+  hammerPrefab: {fileID: 8756619661176829177, guid: b6fbebb58af6ea6468ea74def559f5c1,
     type: 3}
   hammerPoint: {fileID: 8977023270722728923}
 --- !u!114 &1131852716135959337
@@ -1601,7 +1602,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8977023270722728924}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 1.059, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4174414455356963135}

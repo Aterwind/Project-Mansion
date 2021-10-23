@@ -11,8 +11,8 @@ public class EnemySpawn : MonoBehaviour
     private int _RandomListEnemy;
     private int _MaxRandomListEnemy;
 
-    [SerializeField]private float waveRate = 2;
-    [SerializeField] private float nextWaveTime = 2;
+    [SerializeField] private float waveRate = 2;
+    private float nextWaveTime = 2;
 
     public List<EnemiesBase> enemyType = new List<EnemiesBase>();
     public List<GameObject> spawnList = new List<GameObject>();
@@ -40,7 +40,6 @@ public class EnemySpawn : MonoBehaviour
     void Spawn()
     {
         enemyType[_RandomListEnemy] = pool.GetObject();
-
         int spawnRandomList = Random.Range(0, _MaxRandomListEnemy);
 
         enemyType[_RandomListEnemy].transform.position = spawnList[spawnRandomList].transform.position;

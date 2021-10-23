@@ -18,23 +18,32 @@ public class MovementConstructor
         _player.moveDirX = Vector3.right;
         _player.positionCamara = new Vector3(_player.xCam, 0,-_player.zCam);
 
+        _player.Lantern.transform.LookAt(_player.PositionOne);
     }
     public void Left()
     {
         _player.moveDirX = Vector3.left;
         _player.positionCamara = new Vector3(-_player.xCam, 0, -_player.zCam);
+
+        _player.Lantern.transform.LookAt(_player.PositionTwo);
     }
     public void Up()
     {
-        Debug.Log("arriba");
         _player.moveDirY = Vector3.up;
-        _player.Jump = true;
+        _player.jumpSwipe = true;
     }
     public void Down()
     {
-        Debug.Log("abajo");
-        _player.moveDirY = Vector3.down;
-        _player.Jump = true;
+        _player.moveDirY = Vector3.down/3;
+        _player.jumpSwipe = true;
+    }
+
+    public void Die()
+    {
+        _player.animator.SetBool("Die", true);
+        _player.rb.useGravity = false;
+        _player.playerCollider.enabled = false;
+        _player.Lantern.SetActive(false);
     }
 
     public void MoveDir(Vector3 direction)
@@ -45,9 +54,9 @@ public class MovementConstructor
 
     public void JumpDir(Vector3 directionY)
     {
-        if (_player.Jump == true)
+        if (_player.jumpSwipe == true)
         {
-            _player.Jump = false;
+            _player.jumpSwipe = false;
             _player.rb.AddForce(directionY * _player.jumpSpeed, ForceMode.Impulse);
         }
     }

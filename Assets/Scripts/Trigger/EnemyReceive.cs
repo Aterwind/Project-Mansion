@@ -16,6 +16,7 @@ public class EnemyReceive : EnemiesBase, IDamageable
             BackStock.Invoke(this);
             EventManager.Trigger("UpdateUIenemyTotal", -1);
         }
+
     }
 
     public void Reset()

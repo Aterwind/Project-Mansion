@@ -24,7 +24,7 @@ public class ObjectPool<T>
             _turnOffCallback(o);
             _currentStock.Add(o);
         }
-    }  
+    }
 
     public T GetObject()
     {
@@ -37,9 +37,8 @@ public class ObjectPool<T>
         }
         else
         {
-            result = _factoryMethod();
+            return _factoryMethod();
         }
-
 
         _turnOnCallback(result);
         return result;

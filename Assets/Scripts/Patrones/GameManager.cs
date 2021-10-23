@@ -7,6 +7,10 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
+
+    public List<GameObject> platformActive = new List<GameObject>();
+    public float platformCoolDown = 0;
+
     public int distancePixel;
     [HideInInspector]
     public bool startSwipe;
@@ -14,7 +18,8 @@ public class GameManager : MonoBehaviour
     public Vector2 initPosSwipe;
     [HideInInspector]
     public Vector2 finalPosSwipe;
-    public Action endSwipe;
+    public Action endSwipeX;
+    public Action endSwipeY;
 
     void Awake()
     {
@@ -46,7 +51,32 @@ public class GameManager : MonoBehaviour
     {
         finalPosSwipe = Input.touches[0].position;
         startSwipe = false;
-        endSwipe.Invoke();
+
+        if (initPosSwipe.x > finalPosSwipe.x || initPosSwipe.x < finalPosSwipe.x)
+            endSwipeX.Invoke();
+
+        if (initPosSwipe.y > finalPosSwipe.y || initPosSwipe.y < finalPosSwipe.y)
+            endSwipeY.Invoke();
+
         //Debug.Log("Start Position: " + initPosSwipe.x + " / End Position: " + finalPosSwipe.x);
+    }
+
+    public void platformSwitch()
+    {
+        for (int i = 0; i < platformActive.Count; i++)
+        {
+            platformActive[i].gameObject.GetComponent<BoxCollider>().enabled = false;
+        }
+        StartCoroutine(ActivePlatform());
+    }
+
+    IEnumerator ActivePlatform()
+    {
+        yield return new WaitForSeconds(platformCoolDown);
+
+        for (int i = 0; i < platformActive.Count; i++)
+        {
+            platformActive[i].gameObject.GetComponent<BoxCollider>().enabled = true;
+        }
     }
 }

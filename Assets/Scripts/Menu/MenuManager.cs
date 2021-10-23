@@ -7,9 +7,9 @@ public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject MainMenu=null;
     [SerializeField] private GameObject Controlls=null;
-    public void LoadScene(string sceneName)
+    public void LoadScene()
     {
-        SceneManager.LoadScene(sceneName);
+        SceneManager.LoadScene(1);
     }
 
     public void Contolls(int menu)
